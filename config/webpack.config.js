@@ -1,4 +1,5 @@
 const path = require('path')
+const Webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
@@ -17,6 +18,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -26,6 +31,7 @@ module.exports = {
       filename: 'index.html', // 自动生成的html文件名
       inject: true, // 默认值为true，将所有的js资源放在body底部
     }),
+    new Webpack.HotModuleReplacementPlugin(),
     new FriendlyErrorsWebpackPlugin({
       compilationSuccessInfo: {
         messages: ['You application is running here http://localhost:8080'],
@@ -36,5 +42,10 @@ module.exports = {
   devServer: {
     progress: true,
     hot: true,
+  },
+  resolve: {
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    }
   }
 }

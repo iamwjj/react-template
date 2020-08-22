@@ -15,6 +15,7 @@ module.exports = {
     ["@babel/plugin-transform-runtime", {
       // 但如果是写第三方库，最好就是在这里配置polyfill。这样配置会打包全部polyfill，不会根据目标浏览器动态调整polyfill的内容
       // corejs: 3
-    }]
+    }],
+    "react-hot-loader/babel"
   ]
 }
